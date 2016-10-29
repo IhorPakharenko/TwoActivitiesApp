@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <ListView
-        android:id="@+id/listview_people"
+        android:id="@+id/listview_students"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

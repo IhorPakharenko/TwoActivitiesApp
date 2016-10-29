@@ -1,12 +1,13 @@
-package com.example.isao.twoactivities2;
+package com.example.isao.twoactivities2.data;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
+
+import com.example.isao.twoactivities2.listView.ListViewActivity;
+import com.example.isao.twoactivities2.R;
+import com.example.isao.twoactivities2.recyclerView.RecyclerViewActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void startListViewActivity(View view) {
         Intent intent = new Intent(this, ListViewActivity.class);
+        startActivity(intent);
+    }
+
+    public void startRecyclerViewActivity(View view) {
+        Intent intent = new Intent(this, RecyclerViewActivity.class);
         startActivity(intent);
     }
 }
