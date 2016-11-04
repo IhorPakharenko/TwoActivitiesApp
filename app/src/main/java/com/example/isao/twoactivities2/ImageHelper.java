@@ -8,10 +8,10 @@ import android.widget.ImageView;
 
 import java.io.InputStream;
 
-public class ImageHelper extends AsyncTask<String, Void, Bitmap> {
+class ImageHelper extends AsyncTask<String, Void, Bitmap> {
     ImageView bmImage;
 
-    public ImageHelper(ImageView bmImage) {
+    ImageHelper(ImageView bmImage) {
         this.bmImage = bmImage;
     }
 

@@ -2,7 +2,6 @@ package com.example.isao.twoactivities2.listView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.isao.twoactivities2.GithubActivity;
+import com.example.isao.twoactivities2.GoogleActivity;
 import com.example.isao.twoactivities2.R;
 import com.example.isao.twoactivities2.data.Student;
 
@@ -58,10 +58,9 @@ public class StudentListViewAdapter extends BaseAdapter {
         studentName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
-                context.startActivity(
-                        new Intent(
-                        Intent.ACTION_VIEW, Uri.parse(
-                        student.getStudentsGooglePlus())));
+                Intent intent = new Intent(context, GoogleActivity.class);
+                intent.putExtra("GOOGLE_LINK", student.getStudentsGooglePlus());
+                context.startActivity(intent);
             }
         });
 
@@ -76,7 +75,6 @@ public class StudentListViewAdapter extends BaseAdapter {
  */
                 Intent intent = new Intent(context, GithubActivity.class);
                 intent.putExtra("GITHUB_LINK", student.getStudentsGit());
-                //TODO: check if intent isnt null
                 context.startActivity(intent);
             }
         });

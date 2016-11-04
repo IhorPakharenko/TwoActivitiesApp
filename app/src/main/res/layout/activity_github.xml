@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,8 +17,7 @@
         <ImageView
             android:id="@+id/git_avatar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srcCompat="@android:color/holo_blue_dark" />
+            android:layout_height="match_parent" />
     </FrameLayout>
 
     <LinearLayout
@@ -34,7 +32,6 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:paddingTop="16dp"
-            android:text="TextView"
             android:textSize="36sp" />
 
         <TextView
@@ -42,7 +39,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="TextView"
             android:textSize="18sp" />
 
         <TextView
@@ -51,7 +47,6 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:paddingTop="0dp"
-            android:text="TextView"
             android:textSize="24sp" />
     </LinearLayout>
 
