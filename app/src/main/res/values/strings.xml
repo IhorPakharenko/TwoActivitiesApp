@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TwoActivities2</string>
+    <string name="title_activity_github">GithubActivity</string>
 </resources>

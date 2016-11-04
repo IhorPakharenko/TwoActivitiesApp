@@ -10,8 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.isao.twoactivities2.data.Student;
+import com.example.isao.twoactivities2.GithubActivity;
 import com.example.isao.twoactivities2.R;
+import com.example.isao.twoactivities2.data.Student;
 
 import java.util.ArrayList;
 
@@ -68,9 +69,15 @@ public class StudentListViewAdapter extends BaseAdapter {
         gitLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.startActivity(
-                        new Intent(
-                        Intent.ACTION_VIEW, Uri.parse(student.getStudentsGit())));
+/**
+ *                context.startActivity(
+ *                        new Intent(
+ *                        Intent.ACTION_VIEW, Uri.parse(student.getStudentsGit())));
+ */
+                Intent intent = new Intent(context, GithubActivity.class);
+                intent.putExtra("GITHUB_LINK", student.getStudentsGit());
+                //TODO: check if intent isnt null
+                context.startActivity(intent);
             }
         });
         return view;

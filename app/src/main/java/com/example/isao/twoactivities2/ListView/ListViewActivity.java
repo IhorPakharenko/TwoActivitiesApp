@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.isao.twoactivities2.R;
+import com.example.isao.twoactivities2.data.ArrayLists;
 import com.example.isao.twoactivities2.data.Student;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class ListViewActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.listview_fragment, container, false);
 
-            ArrayList<Student> studentsList = Student.makeStudentsList();
+            ArrayList<Student> studentsList = ArrayLists.makeStudentsList();
 
             ListView listView = (ListView) rootView.findViewById(R.id.listview_students);
 
