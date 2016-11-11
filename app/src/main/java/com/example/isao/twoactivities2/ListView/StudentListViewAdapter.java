@@ -9,9 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.isao.twoactivities2.GithubActivity;
-import com.example.isao.twoactivities2.GoogleActivity;
 import com.example.isao.twoactivities2.R;
+import com.example.isao.twoactivities2.accountViews.GithubActivity;
+import com.example.isao.twoactivities2.accountViews.GoogleActivity;
 import com.example.isao.twoactivities2.data.Student;
 
 import java.util.ArrayList;

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.example.isao.twoactivities2.PictureViewActivity;
 import com.example.isao.twoactivities2.R;
 import com.example.isao.twoactivities2.listView.ListViewActivity;
 import com.example.isao.twoactivities2.recyclerView.RecyclerViewActivity;
@@ -27,5 +28,11 @@ public class MainActivity extends AppCompatActivity {
     public void startRecyclerViewActivity(View view) {
         Intent intent = new Intent(this, RecyclerViewActivity.class);
         startActivity(intent);
+    }
+
+    public void startPictureViewActivity(View view) {
+        startActivity(new Intent(
+                this, PictureViewActivity.class
+        ));
     }
 }

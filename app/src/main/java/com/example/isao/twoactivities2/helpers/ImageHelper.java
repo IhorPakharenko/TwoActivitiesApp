@@ -1,4 +1,4 @@
-package com.example.isao.twoactivities2;
+package com.example.isao.twoactivities2.helpers;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,10 +8,10 @@ import android.widget.ImageView;
 
 import java.io.InputStream;
 
-class ImageHelper extends AsyncTask<String, Void, Bitmap> {
+public class ImageHelper extends AsyncTask<String, Void, Bitmap> {
     ImageView bmImage;
 
-    ImageHelper(ImageView bmImage) {
+    public ImageHelper(ImageView bmImage) {
         this.bmImage = bmImage;
     }
 

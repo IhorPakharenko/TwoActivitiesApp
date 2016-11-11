@@ -1,4 +1,4 @@
-package com.example.isao.twoactivities2;
+package com.example.isao.twoactivities2.accountViews;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.isao.twoactivities2.R;
+import com.example.isao.twoactivities2.helpers.ImageHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,26 +21,20 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import okhttp3.HttpUrl;
-
-public class GoogleActivity extends AppCompatActivity {
+public class GithubActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_google);
+        setContentView(R.layout.activity_github);
         Intent intent = getIntent();
         GetInfoTask getInfoTask = new GetInfoTask();
-        getInfoTask.execute(intent.getStringExtra("GOOGLE_LINK"));
+        getInfoTask.execute(intent.getStringExtra("GITHUB_LINK"));
     }
 
-    private String getImprovedAvatarUrl(String defaultUrl, int size) {
-        HttpUrl url = HttpUrl.parse(defaultUrl)
-                .newBuilder()
-                .removeAllQueryParameters("sz")
-                .addQueryParameter("sz", new Integer(size).toString())
-                .build();
-        return url.toString();
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 
     public class GetInfoTask extends AsyncTask<String, Void, String[]> {
@@ -46,12 +43,16 @@ public class GoogleActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String[] strings) {
-
-            TextView textViewName = (TextView) findViewById(R.id.google_name);
+            TextView textViewName = (TextView) findViewById(R.id.git_name);
             textViewName.setText(strings[1]);
-            ImageView imageViewAvatar = (ImageView) findViewById(R.id.google_avatar);
+            TextView textViewEmail = (TextView) findViewById(R.id.git_email);
+            textViewEmail.setText(strings[2]);
+            TextView textViewAddress = (TextView) findViewById(R.id.git_address);
+            textViewAddress.setText(strings[3]);
+            ImageView imageViewAvatar = (ImageView) findViewById(R.id.git_avatar);
             new ImageHelper(imageViewAvatar)
-                    .execute(getImprovedAvatarUrl(strings[0], 200));
+                    .execute(strings[0]);
+
             super.onPostExecute(strings);
         }
 
@@ -61,12 +62,11 @@ public class GoogleActivity extends AppCompatActivity {
             BufferedReader reader = null;
 
             String infoJsonStr = null;
-            final String apiKey = "?key=AIzaSyC0y5Lh1Qlhmyb04F4jtcSX4MGEJEgbuBw";
+
 
             try {
-                URL url = new URL("https://www.googleapis.com/plus/v1/people/" +
-                        params[0] + apiKey);
-                Log.w(LOG_TAG, url.toString());
+                URL url = new URL("https://api.github.com/users/" + params[0]);
+
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();
@@ -114,33 +114,48 @@ public class GoogleActivity extends AppCompatActivity {
             return null;
         }
 
-
         private String[] getDataFromJson(String infoJsonStr) throws JSONException {
-            final String AVATAR_URL = "url";
-            final String NAME = "displayName";
-            final String AVATAR_PATH = "image";
+            final String AVATAR_URL = "avatar_url";
+            final String NAME = "name";
+            final String LOGIN = "login";
+            final String EMAIL = "email";
+            final String ADDRESS = "location";
 
             JSONObject userDataJson = new JSONObject(infoJsonStr);
-            JSONObject avatarPath = userDataJson.getJSONObject(AVATAR_PATH);
-            //JSONObject avatarObject = avatarPath.getJSONObject(AVATAR_URL);
 
             String avatar;
             String name;
+            String email;
+            String address;
 
-            avatar = avatarPath.getString(AVATAR_URL);
+            //String nullString = "null";
+            //userDataJson.put(nullString, nullString);
+            //Log.w("null string is ", userDataJson.getString(nullString));
 
+            avatar = userDataJson.getString(AVATAR_URL);
             if (!(userDataJson.getString(NAME).equals("null"))) {
                 name = userDataJson.getString(NAME);
             } else {
-                name = "Ім'я невідоме";
+                name = userDataJson.getString(LOGIN);
             }
-
+            if (!(userDataJson.getString(EMAIL).equals("null"))) {
+                email = userDataJson.getString(EMAIL);
+            } else {
+                email = "Невідомий імейл";
+            }
+            if (!(userDataJson.getString(ADDRESS).equals("null"))) {
+                address = userDataJson.getString(ADDRESS);
+            } else {
+                address = "Невідома адреса";
+            }
             String[] resultStrings = {
-                    avatar, name
+                    avatar, name, email, address
             };
 
             Log.w(LOG_TAG, resultStrings[0] + " first");
             Log.w(LOG_TAG, resultStrings[1] + " second");
+            Log.w(LOG_TAG, resultStrings[2] + " third");
+            Log.w(LOG_TAG, resultStrings[3] + " fourth");
 
             return resultStrings;
         }
