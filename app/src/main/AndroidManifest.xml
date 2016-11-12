@@ -14,7 +14,6 @@
         <activity android:name=".mainActivity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -22,7 +21,12 @@
         <activity android:name=".recyclerView.RecyclerViewActivity" />
         <activity android:name=".accountViews.GoogleActivity" />
         <activity android:name=".accountViews.GithubActivity" />
-        <activity android:name=".PictureViewActivity"></activity>
+        <activity android:name=".PictureViewActivity"/>
+        <receiver android:name=".HeadsetIntentReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.HEADSET_PLUG"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

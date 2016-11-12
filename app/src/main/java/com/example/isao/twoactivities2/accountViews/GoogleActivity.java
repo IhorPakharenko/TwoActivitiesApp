@@ -1,6 +1,7 @@
 package com.example.isao.twoactivities2.accountViews;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.isao.twoactivities2.HeadsetIntentReceiver;
 import com.example.isao.twoactivities2.R;
 import com.example.isao.twoactivities2.helpers.ImageHelper;
 
@@ -25,6 +27,8 @@ import okhttp3.HttpUrl;
 
 public class GoogleActivity extends AppCompatActivity {
 
+    HeadsetIntentReceiver headsetReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +36,20 @@ public class GoogleActivity extends AppCompatActivity {
         Intent intent = getIntent();
         GetInfoTask getInfoTask = new GetInfoTask();
         getInfoTask.execute(intent.getStringExtra("GOOGLE_LINK"));
+    }
+
+    @Override
+    public void onResume() {
+        headsetReceiver = new HeadsetIntentReceiver();
+        IntentFilter filter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
+        registerReceiver(headsetReceiver, filter);
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        unregisterReceiver(headsetReceiver);
+        super.onPause();
     }
 
     private String getImprovedAvatarUrl(String defaultUrl, int size) {

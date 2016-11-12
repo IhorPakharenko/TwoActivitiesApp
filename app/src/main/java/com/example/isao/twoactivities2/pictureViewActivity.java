@@ -2,6 +2,7 @@ package com.example.isao.twoactivities2;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 public class PictureViewActivity extends AppCompatActivity {
+
+    HeadsetIntentReceiver headsetReceiver;
 
     final int GALLERY_REQUEST = 0;
     final int CAMERA_REQUEST = 1;
@@ -67,5 +70,23 @@ public class PictureViewActivity extends AppCompatActivity {
                 imageView.setImageBitmap(imageBitmap);
             }
         }
+    }
+
+    @Override
+    public void onResume() {
+        Log.w("Receiver", "registering");
+        headsetReceiver = new HeadsetIntentReceiver();
+        IntentFilter filter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
+        registerReceiver(headsetReceiver, filter);
+        super.onResume();
+        Log.w("Receiver", "registered!");
+    }
+
+    @Override
+    public void onPause() {
+        Log.w("Receiver", "unregistering!");
+        unregisterReceiver(headsetReceiver);
+        super.onPause();
+
     }
 }

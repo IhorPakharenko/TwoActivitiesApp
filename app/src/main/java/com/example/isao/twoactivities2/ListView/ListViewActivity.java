@@ -1,5 +1,7 @@
 package com.example.isao.twoactivities2.listView;
 
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.example.isao.twoactivities2.HeadsetIntentReceiver;
 import com.example.isao.twoactivities2.R;
 import com.example.isao.twoactivities2.data.ArrayLists;
 import com.example.isao.twoactivities2.data.Student;
@@ -15,6 +18,8 @@ import com.example.isao.twoactivities2.data.Student;
 import java.util.ArrayList;
 
 public class ListViewActivity extends AppCompatActivity {
+
+    HeadsetIntentReceiver headsetReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +54,18 @@ public class ListViewActivity extends AppCompatActivity {
 
 
         }
-
-
+    }
+    @Override
+    public void onResume() {
+        headsetReceiver = new HeadsetIntentReceiver();
+        IntentFilter filter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
+        registerReceiver(headsetReceiver, filter);
+        super.onResume();
     }
 
+    @Override
+    public void onPause() {
+        unregisterReceiver(headsetReceiver);
+        super.onPause();
+    }
 }
