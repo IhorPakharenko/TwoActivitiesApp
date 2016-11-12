@@ -8,10 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.isao.twoactivities2.HeadsetIntentReceiver;
 import com.example.isao.twoactivities2.R;
 import com.example.isao.twoactivities2.helpers.ImageHelper;
+import com.example.isao.twoactivities2.receivers.HeadsetIntentReceiver;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,14 +26,25 @@ import java.net.URL;
 
 public class GithubActivity extends AppCompatActivity {
 
+    private final String LOG_TAG = GetInfoTask.class.getSimpleName();
     HeadsetIntentReceiver headsetReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_github);
         Intent intent = getIntent();
-        GetInfoTask getInfoTask = new GetInfoTask();
-        getInfoTask.execute(intent.getStringExtra("GITHUB_LINK"));
+
+        if (intent.hasExtra("GITHUB_LINK")) {
+            Log.d(LOG_TAG, "there`s a right link");
+            GetInfoTask getInfoTask = new GetInfoTask();
+            getInfoTask.execute(intent.getStringExtra("GITHUB_LINK"));
+        } else {
+            Toast.makeText
+                    (getApplicationContext(), "Please open only user pages", Toast.LENGTH_LONG)
+                    .show();
+            finish();
+        }
     }
 
     @Override
@@ -49,14 +61,7 @@ public class GithubActivity extends AppCompatActivity {
         super.onPause();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
     public class GetInfoTask extends AsyncTask<String, Void, String[]> {
-
-        private final String LOG_TAG = GetInfoTask.class.getSimpleName();
 
         @Override
         protected void onPostExecute(String[] strings) {

@@ -1,4 +1,4 @@
-package com.example.isao.twoactivities2;
+package com.example.isao.twoactivities2.receivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

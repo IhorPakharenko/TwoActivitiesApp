@@ -8,10 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.isao.twoactivities2.HeadsetIntentReceiver;
 import com.example.isao.twoactivities2.R;
 import com.example.isao.twoactivities2.helpers.ImageHelper;
+import com.example.isao.twoactivities2.receivers.HeadsetIntentReceiver;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +28,7 @@ import okhttp3.HttpUrl;
 
 public class GoogleActivity extends AppCompatActivity {
 
+    private final String LOG_TAG = GetInfoTask.class.getSimpleName();
     HeadsetIntentReceiver headsetReceiver;
 
     @Override
@@ -34,8 +36,17 @@ public class GoogleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google);
         Intent intent = getIntent();
-        GetInfoTask getInfoTask = new GetInfoTask();
-        getInfoTask.execute(intent.getStringExtra("GOOGLE_LINK"));
+
+        if (intent.hasExtra("GOOGLE_LINK")) {
+            Log.d(LOG_TAG, "there`s a right link");
+            GetInfoTask getInfoTask = new GetInfoTask();
+            getInfoTask.execute(intent.getStringExtra("GOOGLE_LINK"));
+        } else {
+            Toast.makeText
+                    (getApplicationContext(), "Please open only user pages", Toast.LENGTH_LONG)
+                    .show();
+            finish();
+        }
     }
 
     @Override
@@ -62,8 +73,6 @@ public class GoogleActivity extends AppCompatActivity {
     }
 
     public class GetInfoTask extends AsyncTask<String, Void, String[]> {
-
-        private final String LOG_TAG = GetInfoTask.class.getSimpleName();
 
         @Override
         protected void onPostExecute(String[] strings) {
@@ -143,7 +152,6 @@ public class GoogleActivity extends AppCompatActivity {
 
             JSONObject userDataJson = new JSONObject(infoJsonStr);
             JSONObject avatarPath = userDataJson.getJSONObject(AVATAR_PATH);
-            //JSONObject avatarObject = avatarPath.getJSONObject(AVATAR_URL);
 
             String avatar;
             String name;

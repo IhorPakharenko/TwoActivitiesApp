@@ -7,10 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.isao.twoactivities2.HeadsetIntentReceiver;
 import com.example.isao.twoactivities2.R;
 import com.example.isao.twoactivities2.data.ArrayLists;
 import com.example.isao.twoactivities2.data.Student;
+import com.example.isao.twoactivities2.receivers.HeadsetIntentReceiver;
 
 import java.util.ArrayList;
 

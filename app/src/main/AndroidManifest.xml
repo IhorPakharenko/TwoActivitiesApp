@@ -19,12 +19,35 @@
         </activity>
         <activity android:name=".listView.ListViewActivity" />
         <activity android:name=".recyclerView.RecyclerViewActivity" />
-        <activity android:name=".accountViews.GoogleActivity" />
-        <activity android:name=".accountViews.GithubActivity" />
-        <activity android:name=".PictureViewActivity"/>
-        <receiver android:name=".HeadsetIntentReceiver">
+        <activity android:name=".accountViews.GoogleActivity">
             <intent-filter>
-                <action android:name="android.intent.action.HEADSET_PLUG"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="plus.google.com"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".accountViews.GithubActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="github.com"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".pictureViewActivity.PictureViewActivity" />
+
+        <receiver android:name=".receivers.HeadsetIntentReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.HEADSET_PLUG" />
             </intent-filter>
         </receiver>
     </application>

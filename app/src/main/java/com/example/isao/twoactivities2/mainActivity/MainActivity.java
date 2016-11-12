@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.example.isao.twoactivities2.HeadsetIntentReceiver;
-import com.example.isao.twoactivities2.PictureViewActivity;
 import com.example.isao.twoactivities2.R;
 import com.example.isao.twoactivities2.listView.ListViewActivity;
+import com.example.isao.twoactivities2.pictureViewActivity.PictureViewActivity;
+import com.example.isao.twoactivities2.receivers.HeadsetIntentReceiver;
 import com.example.isao.twoactivities2.recyclerView.RecyclerViewActivity;
 
 public class MainActivity extends AppCompatActivity {
