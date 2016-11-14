@@ -37,8 +37,13 @@ public class GithubActivity extends AppCompatActivity {
 
         if (intent.hasExtra("GITHUB_LINK")) {
             Log.d(LOG_TAG, "there`s a right link");
+            Log.d(LOG_TAG, intent.getStringExtra("GITHUB_LINK"));
             GetInfoTask getInfoTask = new GetInfoTask();
             getInfoTask.execute(intent.getStringExtra("GITHUB_LINK"));
+        } else if (intent.getData().getHost().equals("github.com")) {
+            String customLink = intent.getData().getLastPathSegment();
+            GetInfoTask getInfoTask = new GetInfoTask();
+            getInfoTask.execute(customLink);
         } else {
             Toast.makeText
                     (getApplicationContext(), "Please open only user pages", Toast.LENGTH_LONG)

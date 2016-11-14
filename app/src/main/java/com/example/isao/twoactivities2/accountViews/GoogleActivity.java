@@ -39,8 +39,13 @@ public class GoogleActivity extends AppCompatActivity {
 
         if (intent.hasExtra("GOOGLE_LINK")) {
             Log.d(LOG_TAG, "there`s a right link");
+            Log.d(LOG_TAG, intent.getExtras().toString());
             GetInfoTask getInfoTask = new GetInfoTask();
             getInfoTask.execute(intent.getStringExtra("GOOGLE_LINK"));
+        } else if (intent.getData().getHost().equals("plus.google.com")) {
+            String customLink = intent.getData().getLastPathSegment();
+            GetInfoTask getInfoTask = new GetInfoTask();
+            getInfoTask.execute(customLink);
         } else {
             Toast.makeText
                     (getApplicationContext(), "Please open only user pages", Toast.LENGTH_LONG)
