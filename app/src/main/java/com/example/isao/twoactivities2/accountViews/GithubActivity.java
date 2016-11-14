@@ -45,10 +45,7 @@ public class GithubActivity extends AppCompatActivity {
             GetInfoTask getInfoTask = new GetInfoTask();
             getInfoTask.execute(customLink);
         } else {
-            Toast.makeText
-                    (getApplicationContext(), "Please open only user pages", Toast.LENGTH_LONG)
-                    .show();
-            finish();
+            handleIncorrectUrl();
         }
     }
 
@@ -66,21 +63,32 @@ public class GithubActivity extends AppCompatActivity {
         super.onPause();
     }
 
+    private void handleIncorrectUrl() {
+        Toast.makeText
+                (getApplicationContext(), "Please open only user pages", Toast.LENGTH_LONG)
+                .show();
+        finish();
+    }
+
     public class GetInfoTask extends AsyncTask<String, Void, String[]> {
 
         @Override
         protected void onPostExecute(String[] strings) {
-            TextView textViewName = (TextView) findViewById(R.id.git_name);
-            textViewName.setText(strings[1]);
-            TextView textViewEmail = (TextView) findViewById(R.id.git_email);
-            textViewEmail.setText(strings[2]);
-            TextView textViewAddress = (TextView) findViewById(R.id.git_address);
-            textViewAddress.setText(strings[3]);
-            ImageView imageViewAvatar = (ImageView) findViewById(R.id.git_avatar);
-            new ImageHelper(imageViewAvatar)
-                    .execute(strings[0]);
+            if (strings != null) {
+                TextView textViewName = (TextView) findViewById(R.id.git_name);
+                textViewName.setText(strings[1]);
+                TextView textViewEmail = (TextView) findViewById(R.id.git_email);
+                textViewEmail.setText(strings[2]);
+                TextView textViewAddress = (TextView) findViewById(R.id.git_address);
+                textViewAddress.setText(strings[3]);
+                ImageView imageViewAvatar = (ImageView) findViewById(R.id.git_avatar);
+                new ImageHelper(imageViewAvatar)
+                        .execute(strings[0]);
+                super.onPostExecute(strings);
+            } else {
+                handleIncorrectUrl();
+            }
 
-            super.onPostExecute(strings);
         }
 
         @Override
@@ -97,6 +105,10 @@ public class GithubActivity extends AppCompatActivity {
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();
+
+                if (urlConnection.getResponseCode() == 404) {
+                    return null;
+                }
 
                 InputStream inputStream = urlConnection.getInputStream();
                 StringBuffer buffer = new StringBuffer();
@@ -154,10 +166,6 @@ public class GithubActivity extends AppCompatActivity {
             String name;
             String email;
             String address;
-
-            //String nullString = "null";
-            //userDataJson.put(nullString, nullString);
-            //Log.w("null string is ", userDataJson.getString(nullString));
 
             avatar = userDataJson.getString(AVATAR_URL);
             if (!(userDataJson.getString(NAME).equals("null"))) {

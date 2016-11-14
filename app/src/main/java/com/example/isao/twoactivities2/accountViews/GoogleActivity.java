@@ -47,10 +47,7 @@ public class GoogleActivity extends AppCompatActivity {
             GetInfoTask getInfoTask = new GetInfoTask();
             getInfoTask.execute(customLink);
         } else {
-            Toast.makeText
-                    (getApplicationContext(), "Please open only user pages", Toast.LENGTH_LONG)
-                    .show();
-            finish();
+            handleIncorrectUrl();
         }
     }
 
@@ -68,6 +65,13 @@ public class GoogleActivity extends AppCompatActivity {
         super.onPause();
     }
 
+    private void handleIncorrectUrl() {
+        Toast.makeText
+                (getApplicationContext(), "Please open only user pages", Toast.LENGTH_LONG)
+                .show();
+        finish();
+    }
+
     private String getImprovedAvatarUrl(String defaultUrl, int size) {
         HttpUrl url = HttpUrl.parse(defaultUrl)
                 .newBuilder()
@@ -81,13 +85,17 @@ public class GoogleActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String[] strings) {
+            if (strings != null) {
+                TextView textViewName = (TextView) findViewById(R.id.google_name);
+                textViewName.setText(strings[1]);
+                ImageView imageViewAvatar = (ImageView) findViewById(R.id.google_avatar);
+                new ImageHelper(imageViewAvatar)
+                        .execute(getImprovedAvatarUrl(strings[0], 200));
+                super.onPostExecute(strings);
+            } else {
+                handleIncorrectUrl();
+            }
 
-            TextView textViewName = (TextView) findViewById(R.id.google_name);
-            textViewName.setText(strings[1]);
-            ImageView imageViewAvatar = (ImageView) findViewById(R.id.google_avatar);
-            new ImageHelper(imageViewAvatar)
-                    .execute(getImprovedAvatarUrl(strings[0], 200));
-            super.onPostExecute(strings);
         }
 
         @Override
@@ -105,6 +113,10 @@ public class GoogleActivity extends AppCompatActivity {
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();
+
+                if (urlConnection.getResponseCode() == 404) {
+                    return null;
+                }
 
                 InputStream inputStream = urlConnection.getInputStream();
                 StringBuffer buffer = new StringBuffer();
