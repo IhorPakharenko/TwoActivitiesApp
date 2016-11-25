@@ -54,7 +54,7 @@
         </receiver>
 
         <activity
-            android:name=".ContactsActivity"
+            android:name=".contactsActivity.ContactsActivity"
             android:label="@string/title_activity_contacts"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

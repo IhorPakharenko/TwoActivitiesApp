@@ -1,4 +1,4 @@
-package com.example.isao.twoactivities2;
+package com.example.isao.twoactivities2.contactsActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+
+import com.example.isao.twoactivities2.R;
 
 public class ContactsActivity extends AppCompatActivity {
 
