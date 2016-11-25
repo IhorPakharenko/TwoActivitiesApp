@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.example.isao.twoactivities2.ContactsActivity;
 import com.example.isao.twoactivities2.R;
 import com.example.isao.twoactivities2.listView.ListViewActivity;
 import com.example.isao.twoactivities2.pictureViewActivity.PictureViewActivity;
@@ -52,6 +53,12 @@ public class MainActivity extends AppCompatActivity {
     public void startPictureViewActivity(View view) {
         startActivity(new Intent(
                 this, PictureViewActivity.class
+        ));
+    }
+
+    public void startContactsActivity(View view) {
+        startActivity(new Intent(
+                this, ContactsActivity.class
         ));
     }
 }

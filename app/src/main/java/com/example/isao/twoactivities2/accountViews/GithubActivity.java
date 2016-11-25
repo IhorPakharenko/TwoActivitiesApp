@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.isao.twoactivities2.GetInfoRetrofit;
+import com.example.isao.twoactivities2.GetInfoRetrofit.JSONResponse;
 import com.example.isao.twoactivities2.R;
 import com.example.isao.twoactivities2.helpers.ImageHelper;
 import com.example.isao.twoactivities2.receivers.HeadsetIntentReceiver;
@@ -23,6 +25,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GithubActivity extends AppCompatActivity {
 
@@ -36,6 +46,12 @@ public class GithubActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         if (intent.hasExtra("GITHUB_LINK")) {
+            try {
+                getInfo(intent.getStringExtra("GITHUB_LINK"));
+            } catch (IOException e) {
+                Log.e(LOG_TAG, "Error " + e);
+            }
+
             Log.d(LOG_TAG, "there`s a right link");
             Log.d(LOG_TAG, intent.getStringExtra("GITHUB_LINK"));
             GetInfoTask getInfoTask = new GetInfoTask();
@@ -47,6 +63,41 @@ public class GithubActivity extends AppCompatActivity {
         } else {
             handleIncorrectUrl();
         }
+    }
+
+    public void getInfo(String parameter) throws IOException {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.github.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        GetInfoRetrofit.RequestInterface request = retrofit.create(GetInfoRetrofit.RequestInterface.class);
+        Call<GetInfoRetrofit.JSONResponse> call = request.getJSON();
+        call.enqueue(new Callback<GetInfoRetrofit.JSONResponse>() {
+            @Override
+            public void onResponse(Call<JSONResponse> call, Response<JSONResponse> response) {
+
+                JSONResponse jsonResponse = response.body();
+                try {
+                    ArrayList<GetInfoRetrofit.UserInfo> userInfos =
+                            new ArrayList<GetInfoRetrofit.UserInfo>(Arrays.asList(jsonResponse.getUser()));
+                } catch (NullPointerException e) {
+                    Log.w("The ArrayList is null", e);
+                }
+
+                //String log = jsonResponse.getUser().getGitName();
+                //Log.w("E SFUMHFKBMK", log);
+                /**
+                ArrayList<GetInfoRetrofit.UserInfo> data =
+                        new ArrayList<>(Arrays.asList(jsonResponse.getUser()));
+                Log.w("THE FIRST IN ARRAY", data.toString());
+                 */
+            }
+            @Override
+            public void onFailure(Call<JSONResponse> call, Throwable t) {
+                Log.d("Error",t.getMessage());
+            }
+        });
     }
 
     @Override

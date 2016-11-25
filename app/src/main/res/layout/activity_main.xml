@@ -29,12 +29,29 @@
         android:text="RecycleView"
         android:textSize="24sp" />
 
-    <Button
-        android:layout_width="wrap_content"
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="startPictureViewActivity"
-        android:text="PictureView"
-        android:textSize="24sp" />
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="startContactsActivity"
+            android:text="Contacts"
+            android:textSize="18sp"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="startPictureViewActivity"
+            android:text="PictureView"
+            android:textSize="18sp"
+            android:layout_weight="1" />
+    </LinearLayout>
 </RelativeLayout>
