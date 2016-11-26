@@ -13,4 +13,9 @@
     tools:context="com.example.isao.twoactivities2.contactsActivity.ContactsActivity"
     tools:showIn="@layout/activity_contacts">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/contacts_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
 </RelativeLayout>

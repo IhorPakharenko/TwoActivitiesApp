@@ -10,8 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.isao.twoactivities2.R;
-import com.example.isao.twoactivities2.GithubRequestInterface;
 import com.example.isao.twoactivities2.helpers.ImageHelper;
+import com.example.isao.twoactivities2.interfaces.GithubRequestInterface;
 import com.example.isao.twoactivities2.model.GithubUser;
 import com.example.isao.twoactivities2.receivers.HeadsetIntentReceiver;
 

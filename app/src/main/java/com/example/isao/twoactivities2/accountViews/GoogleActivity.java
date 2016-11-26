@@ -9,9 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.isao.twoactivities2.GoogleRequestInterface;
 import com.example.isao.twoactivities2.R;
 import com.example.isao.twoactivities2.helpers.ImageHelper;
+import com.example.isao.twoactivities2.interfaces.GoogleRequestInterface;
 import com.example.isao.twoactivities2.model.GoogleUser;
 import com.example.isao.twoactivities2.receivers.HeadsetIntentReceiver;
 

@@ -21,23 +21,10 @@ public class ContactsRecyclerViewAdapter extends
     private Context context;
     private LayoutInflater inflater;
 
-    public ContactsRecyclerViewAdapter(Context context, ArrayList<Contact> contactArrayList) {
+    public ContactsRecyclerViewAdapter(Context context, ArrayList<Contact> contacts) {
         this.context = context;
-        this.contactArrayList = contactArrayList;
+        this.contactArrayList = contacts;
         inflater = LayoutInflater.from(context);
-    }
-
-    class MyViewHolder extends RecyclerView.ViewHolder {
-        LinearLayout linearLayout;
-        TextView nameView;
-        TextView numberView;
-
-        MyViewHolder (View itemView) {
-            super(itemView);
-            linearLayout = (LinearLayout) itemView.findViewById(R.id.contact_wrapper);
-            nameView = (TextView) itemView.findViewById(R.id.contact_name);
-            numberView = (TextView) itemView.findViewById(R.id.contact_number);
-        }
     }
 
     @Override
@@ -57,4 +44,19 @@ public class ContactsRecyclerViewAdapter extends
     public int getItemCount() {
         return contactArrayList.size();
     }
+
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout linearLayout;
+        TextView nameView;
+        TextView numberView;
+
+        MyViewHolder(View itemView) {
+            super(itemView);
+            linearLayout = (LinearLayout) itemView.findViewById(R.id.contact_wrapper);
+            nameView = (TextView) itemView.findViewById(R.id.contact_name);
+            numberView = (TextView) itemView.findViewById(R.id.contact_number);
+        }
+    }
+
+
 }

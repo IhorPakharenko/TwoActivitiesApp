@@ -1,8 +1,5 @@
 package com.example.isao.twoactivities2.data;
 
-/**
- * Created by Isao on 25.11.2016.
- */
 
 public class Contact {
     private String contactName;

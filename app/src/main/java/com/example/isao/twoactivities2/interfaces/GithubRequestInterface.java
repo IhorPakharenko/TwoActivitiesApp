@@ -1,4 +1,4 @@
-package com.example.isao.twoactivities2;
+package com.example.isao.twoactivities2.interfaces;
 
 import com.example.isao.twoactivities2.model.GithubUser;
 
