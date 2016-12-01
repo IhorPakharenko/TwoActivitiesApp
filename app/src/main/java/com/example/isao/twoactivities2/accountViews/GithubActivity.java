@@ -35,11 +35,9 @@ public class GithubActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         if (intent.hasExtra("GITHUB_LINK")) {
-            Log.w("if", "true");
             String linkSegment = intent.getStringExtra("GITHUB_LINK");
             tryGetInfo(linkSegment);
         } else if (intent.getData().getHost().equals("github.com")) {
-            Log.w("else if", "true");
             String linkSegment = intent.getData().getLastPathSegment();
             tryGetInfo(linkSegment);
         } else {
@@ -94,12 +92,11 @@ public class GithubActivity extends AppCompatActivity {
         if (githubUser.getGitLogin() != null) {
             try {
                 name = githubUser.getGitName();
-                Log.w("NAME IS", name);
+                Log.w("name", name);
             } catch (NullPointerException e) {
                 name = githubUser.getGitLogin();
-                Log.w("NAME IS", name);
+                Log.w("name", name);
             }
-            Log.w("NAME IS", name);
             TextView textViewName = (TextView) findViewById(R.id.git_name);
             textViewName.setText(name);
             TextView textViewEmail = (TextView) findViewById(R.id.git_email);
@@ -134,130 +131,4 @@ public class GithubActivity extends AppCompatActivity {
                 .show();
         finish();
     }
-
-    /**
-     public class GetInfoTask extends AsyncTask<String, Void, String[]> {
-
-    @Override protected void onPostExecute(String[] strings) {
-    if (strings != null) {
-    TextView textViewName = (TextView) findViewById(R.id.git_name);
-    textViewName.setText(strings[1]);
-    TextView textViewEmail = (TextView) findViewById(R.id.git_email);
-    textViewEmail.setText(strings[2]);
-    TextView textViewAddress = (TextView) findViewById(R.id.git_address);
-    textViewAddress.setText(strings[3]);
-    ImageView imageViewAvatar = (ImageView) findViewById(R.id.git_avatar);
-    new ImageHelper(imageViewAvatar)
-    .execute(strings[0]);
-    super.onPostExecute(strings);
-    } else {
-    handleIncorrectUrl();
-    }
-
-    }
-
-    @Override protected String[] doInBackground(String... params) {
-    HttpURLConnection urlConnection = null;
-    BufferedReader reader = null;
-
-    String infoJsonStr = null;
-
-
-    try {
-    URL url = new URL("https://api.github.com/users/" + params[0]);
-
-    urlConnection = (HttpURLConnection) url.openConnection();
-    urlConnection.setRequestMethod("GET");
-    urlConnection.connect();
-
-    if (urlConnection.getResponseCode() == 404) {
-    return null;
-    }
-
-    InputStream inputStream = urlConnection.getInputStream();
-    StringBuffer buffer = new StringBuffer();
-    if (inputStream == null) {
-    infoJsonStr = null;
-    }
-    reader = new BufferedReader(new InputStreamReader(inputStream));
-
-    String line;
-    while ((line = reader.readLine()) != null) {
-    buffer.append(line + "\n");
-    }
-
-    if (buffer.length() == 0) {
-    infoJsonStr = null;
-    }
-    infoJsonStr = buffer.toString();
-    } catch (IOException e) {
-    Log.e(LOG_TAG, "Error ", e);
-    infoJsonStr = null;
-    } finally {
-    if (urlConnection != null) {
-    urlConnection.disconnect();
-    }
-    if (reader != null) {
-    try {
-    reader.close();
-    } catch (final IOException e) {
-    Log.e(LOG_TAG, "Error closing stream", e);
-    }
-    }
-    }
-    Log.w(LOG_TAG, infoJsonStr);
-    try {
-    String[] result = getDataFromJson(infoJsonStr);
-    Log.w(LOG_TAG, "Before return " + result[0]);
-    return result;
-    } catch (JSONException e) {
-    Log.e(LOG_TAG, e.getMessage(), e);
-    e.printStackTrace();
-    }
-    return null;
-    }
-
-    private String[] getDataFromJson(String infoJsonStr) throws JSONException {
-    final String AVATAR_URL = "avatar_url";
-    final String NAME = "name";
-    final String LOGIN = "login";
-    final String EMAIL = "email";
-    final String ADDRESS = "location";
-
-    JSONObject userDataJson = new JSONObject(infoJsonStr);
-
-    String avatar;
-    String name;
-    String email;
-    String address;
-
-    avatar = userDataJson.getString(AVATAR_URL);
-    if (!(userDataJson.getString(NAME).equals("null"))) {
-    name = userDataJson.getString(NAME);
-    } else {
-    name = userDataJson.getString(LOGIN);
-    }
-    if (!(userDataJson.getString(EMAIL).equals("null"))) {
-    email = userDataJson.getString(EMAIL);
-    } else {
-    email = "Невідомий імейл";
-    }
-    if (!(userDataJson.getString(ADDRESS).equals("null"))) {
-    address = userDataJson.getString(ADDRESS);
-    } else {
-    address = "Невідома адреса";
-    }
-    String[] resultStrings = {
-    avatar, name, email, address
-    };
-
-    Log.w(LOG_TAG, resultStrings[0] + " first");
-    Log.w(LOG_TAG, resultStrings[1] + " second");
-    Log.w(LOG_TAG, resultStrings[2] + " third");
-    Log.w(LOG_TAG, resultStrings[3] + " fourth");
-
-    return resultStrings;
-    }
-    }
-     */
 }
