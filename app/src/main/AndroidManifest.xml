@@ -12,16 +12,30 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".mainActivity.MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".listView.ListViewActivity" />
-        <activity android:name=".recyclerView.RecyclerViewActivity" />
-        <activity android:name=".accountViews.GoogleActivity">
+        <activity
+            android:name=".activities.ListViewActivity"
+            android:label="@string/title_activity_listview"
+            android:launchMode="standard"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.RecyclerViewActivity"
+            android:label="@string/title_activity_recyclerview"
+            android:launchMode="standard"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.PictureViewActivity"
+            android:label="@string/title_activity_pictureview"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.GoogleActivity"
+            android:label="@string/title_activity_google">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -33,7 +47,9 @@
                     android:scheme="https" />
             </intent-filter>
         </activity>
-        <activity android:name=".accountViews.GithubActivity">
+        <activity
+            android:name=".activities.GithubActivity"
+            android:label="@string/title_activity_github">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -45,7 +61,6 @@
                     android:scheme="https" />
             </intent-filter>
         </activity>
-        <activity android:name=".pictureViewActivity.PictureViewActivity" />
 
         <receiver android:name=".receivers.HeadsetIntentReceiver">
             <intent-filter>
@@ -54,9 +69,14 @@
         </receiver>
 
         <activity
-            android:name=".contactsActivity.ContactsActivity"
+            android:name=".activities.ContactsActivity"
             android:label="@string/title_activity_contacts"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.AddContactActivity"
+            android:label="New contact"
+            android:theme="@style/Base.Theme.AppCompat.Light.Dialog" />
     </application>
 
 </manifest>

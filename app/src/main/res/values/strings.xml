@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">TwoActivities2</string>
-    <string name="title_activity_github">GithubActivity</string>
-    <string name="title_activity_contacts">ContactsActivity</string>
+    <string name="title_activity_listview">ListView</string>
+    <string name="title_activity_recyclerview">RecyclerView</string>
+    <string name="title_activity_github">GitHub</string>
+    <string name="title_activity_google">GooglePlus</string>
+    <string name="title_activity_contacts">Contacts</string>
+    <string name="title_activity_pictureview">Photo picker</string>
 </resources>

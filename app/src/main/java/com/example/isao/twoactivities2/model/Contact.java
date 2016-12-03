@@ -1,4 +1,4 @@
-package com.example.isao.twoactivities2.data;
+package com.example.isao.twoactivities2.model;
 
 
 public class Contact {

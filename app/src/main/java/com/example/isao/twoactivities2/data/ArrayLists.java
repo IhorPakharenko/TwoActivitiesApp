@@ -1,5 +1,7 @@
 package com.example.isao.twoactivities2.data;
 
+import com.example.isao.twoactivities2.model.Student;
+
 import java.util.ArrayList;
 
 public class ArrayLists {

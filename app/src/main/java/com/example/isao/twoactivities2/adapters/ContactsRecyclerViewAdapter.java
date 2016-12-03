@@ -1,4 +1,4 @@
-package com.example.isao.twoactivities2.contactsActivity;
+package com.example.isao.twoactivities2.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.isao.twoactivities2.R;
-import com.example.isao.twoactivities2.data.Contact;
+import com.example.isao.twoactivities2.model.Contact;
 
 import java.util.ArrayList;
 

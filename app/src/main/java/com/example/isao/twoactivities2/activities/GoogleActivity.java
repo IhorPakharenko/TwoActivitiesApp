@@ -1,10 +1,11 @@
-package com.example.isao.twoactivities2.accountViews;
+package com.example.isao.twoactivities2.activities;
 
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,9 @@ public class GoogleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google);
         Intent intent = getIntent();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         if (intent.hasExtra("GOOGLE_LINK")) {
             Log.w("if", "true");
@@ -45,6 +49,30 @@ public class GoogleActivity extends AppCompatActivity {
         } else {
             handleIncorrectUrl();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResume() {
+        headsetReceiver = new HeadsetIntentReceiver();
+        IntentFilter filter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
+        registerReceiver(headsetReceiver, filter);
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        unregisterReceiver(headsetReceiver);
+        super.onPause();
     }
 
     public void tryGetInfo(String userSegment) {
@@ -116,19 +144,5 @@ public class GoogleActivity extends AppCompatActivity {
                 .addQueryParameter("sz", new Integer(size).toString())
                 .build();
         return url.toString();
-    }
-
-    @Override
-    public void onResume() {
-        headsetReceiver = new HeadsetIntentReceiver();
-        IntentFilter filter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
-        registerReceiver(headsetReceiver, filter);
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        unregisterReceiver(headsetReceiver);
-        super.onPause();
     }
 }

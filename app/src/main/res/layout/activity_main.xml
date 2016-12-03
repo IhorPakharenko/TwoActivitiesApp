@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.isao.twoactivities2.mainActivity.MainActivity">
+    tools:context="com.example.isao.twoactivities2.activities.MainActivity">
 
     <Button
         android:layout_width="wrap_content"
@@ -17,7 +17,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:onClick="startListViewActivity"
-        android:text="ListView"
+        android:text="@string/title_activity_listview"
         android:textSize="24sp" />
 
     <Button
@@ -26,32 +26,32 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:onClick="startRecyclerViewActivity"
-        android:text="RecycleView"
+        android:text="@string/title_activity_recyclerview"
         android:textSize="24sp" />
 
 
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:onClick="startContactsActivity"
             android:text="Contacts"
-            android:textSize="18sp"
-            android:layout_weight="1" />
+            android:textSize="18sp" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:onClick="startPictureViewActivity"
             android:text="PictureView"
-            android:textSize="18sp"
-            android:layout_weight="1" />
+            android:textSize="18sp" />
     </LinearLayout>
 </RelativeLayout>

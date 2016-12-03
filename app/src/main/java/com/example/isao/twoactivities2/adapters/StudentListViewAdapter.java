@@ -1,4 +1,4 @@
-package com.example.isao.twoactivities2.listView;
+package com.example.isao.twoactivities2.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,9 +10,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.isao.twoactivities2.R;
-import com.example.isao.twoactivities2.accountViews.GithubActivity;
-import com.example.isao.twoactivities2.accountViews.GoogleActivity;
-import com.example.isao.twoactivities2.data.Student;
+import com.example.isao.twoactivities2.activities.GithubActivity;
+import com.example.isao.twoactivities2.activities.GoogleActivity;
+import com.example.isao.twoactivities2.model.Student;
 
 import java.util.ArrayList;
 

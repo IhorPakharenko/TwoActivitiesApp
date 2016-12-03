@@ -1,4 +1,4 @@
-package com.example.isao.twoactivities2.listView;
+package com.example.isao.twoactivities2.activities;
 
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -11,8 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.isao.twoactivities2.R;
+import com.example.isao.twoactivities2.adapters.StudentListViewAdapter;
 import com.example.isao.twoactivities2.data.ArrayLists;
-import com.example.isao.twoactivities2.data.Student;
+import com.example.isao.twoactivities2.model.Student;
 import com.example.isao.twoactivities2.receivers.HeadsetIntentReceiver;
 
 import java.util.ArrayList;
@@ -28,7 +29,6 @@ public class ListViewActivity extends AppCompatActivity {
 
 
         if (savedInstanceState == null) {
-            //bind the fragment
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container_listview, new ListViewActivityFragment())
                     .commit();

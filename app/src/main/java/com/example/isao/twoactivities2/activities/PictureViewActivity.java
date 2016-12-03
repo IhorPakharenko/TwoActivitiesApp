@@ -1,4 +1,4 @@
-package com.example.isao.twoactivities2.pictureViewActivity;
+package com.example.isao.twoactivities2.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;

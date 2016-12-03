@@ -1,4 +1,4 @@
-package com.example.isao.twoactivities2.recyclerView;
+package com.example.isao.twoactivities2.activities;
 
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -8,8 +8,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.isao.twoactivities2.R;
+import com.example.isao.twoactivities2.adapters.StudentRecyclerViewAdapter;
 import com.example.isao.twoactivities2.data.ArrayLists;
-import com.example.isao.twoactivities2.data.Student;
+import com.example.isao.twoactivities2.model.Student;
 import com.example.isao.twoactivities2.receivers.HeadsetIntentReceiver;
 
 import java.util.ArrayList;
