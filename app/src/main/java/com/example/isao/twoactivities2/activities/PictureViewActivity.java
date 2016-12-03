@@ -3,8 +3,6 @@ package com.example.isao.twoactivities2.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
@@ -15,6 +13,7 @@ import android.widget.ImageView;
 
 import com.example.isao.twoactivities2.R;
 import com.example.isao.twoactivities2.receivers.HeadsetIntentReceiver;
+import com.squareup.picasso.Picasso;
 
 public class PictureViewActivity extends AppCompatActivity {
 
@@ -63,13 +62,9 @@ public class PictureViewActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             if (requestCode == GALLERY_REQUEST) {
-                Log.w("Picture from", "gallery");
-                Uri imageUri = data.getData();
-                imageView.setImageURI(imageUri);
+                Picasso.with(this).load(data.getData()).into(imageView);
             } else if (requestCode == CAMERA_REQUEST) {
-                Bundle extras = data.getExtras();
-                Bitmap imageBitmap = (Bitmap) extras.get("data");
-                imageView.setImageBitmap(imageBitmap);
+                Picasso.with(this).load(data.getData()).into(imageView);
             }
         }
     }
