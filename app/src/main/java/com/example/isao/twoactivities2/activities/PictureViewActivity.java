@@ -89,6 +89,5 @@ public class PictureViewActivity extends AppCompatActivity {
         Log.w("Receiver", "unregistering!");
         unregisterReceiver(headsetReceiver);
         super.onPause();
-
     }
 }

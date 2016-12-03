@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class ContactHelper {
 
-    public ArrayList<Contact> getContacts(Context context) {
+    public static ArrayList<Contact> getContacts(Context context) {
         ArrayList<Contact> contacts = new ArrayList<>();
 
         ContentResolver resolver = context.getContentResolver();
@@ -54,7 +54,7 @@ public class ContactHelper {
         return contacts;
     }
 
-    public void addContact(String name, String number, Context context) {
+    public static void addContact(String name, String number, Context context) {
         ArrayList<ContentProviderOperation> operations = new ArrayList<>();
         int rawContactInsertIndex = operations.size();
 

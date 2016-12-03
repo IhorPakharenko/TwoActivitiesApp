@@ -87,7 +87,7 @@ public class ContactsActivity extends AppCompatActivity {
         if (requestCode == ADD_NEW_CONTACT && intent != null) {
             String name = intent.getStringExtra("name");
             String number = intent.getStringExtra("number");
-            new ContactHelper().addContact(name, number, this);
+            ContactHelper.addContact(name, number, this);
             refreshData();
         }
     }
@@ -114,7 +114,7 @@ public class ContactsActivity extends AppCompatActivity {
             requestPermissions(new String[]{Manifest.permission.READ_CONTACTS},
                     PERMISSIONS_REQUEST_READ_CONTACTS);
         } else {
-            ArrayList<Contact> contactList = new ContactHelper().getContacts(this);
+            ArrayList<Contact> contactList = ContactHelper.getContacts(this);
 
             final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.contacts_recyclerview);
             final ContactsRecyclerViewAdapter contactsAdapter = new ContactsRecyclerViewAdapter(this, contactList);
