@@ -17,7 +17,8 @@ import com.example.isao.twoactivities2.model.Student;
 
 import java.util.ArrayList;
 
-public class StudentRecyclerViewAdapter extends RecyclerView.Adapter<StudentRecyclerViewAdapter.MyViewHolder> {
+public class StudentRecyclerViewAdapter extends
+        RecyclerView.Adapter<StudentRecyclerViewAdapter.MyViewHolder> {
 
     private ArrayList<Student> innerStudentsList;
     private Context context;

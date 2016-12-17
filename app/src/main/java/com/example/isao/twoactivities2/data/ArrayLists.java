@@ -8,7 +8,7 @@ public class ArrayLists {
     public static ArrayList<Student> makeStudentsList() {
         ArrayList<Student> studentsList = new ArrayList<>();
         studentsList.add(new Student("Евгеній Жданов", "zhdanov-ek", "113264746064942658029"));
-        studentsList.add(new Student("Едгар Кімич", "lyfm", "102197104589432395674"));
+        studentsList.add(new Student("Едгар Khimich", "lyfm", "102197104589432395674"));
         studentsList.add(new Student("Олександр Сторчак", "new15", "106553086375805780685"));
         studentsList.add(new Student("Євгеній Ситник", "YevheniiSytnyk", "101427598085441575303"));
         studentsList.add(new Student("Альона Prelestnaya", "HelenCool", "107382407687723634701"));
@@ -19,7 +19,7 @@ public class ArrayLists {
         studentsList.add(new Student("Андрій Рябко", "RyabkoAndrew", "110288437168771810002"));
         studentsList.add(new Student("Іван Левченко", "ivleshch", "111088051831122657934"));
         studentsList.add(new Student("Микола Піхманець", "NikPikhmanets", "110087894894730430086"));
-        studentsList.add(new Student("Руслан Мігал", "rmigal", "106331812587299981536"));
+        studentsList.add(new Student("Руслан Migal", "rmigal", "106331812587299981536"));
         studentsList.add(new Student("Руслан Воловик", "RuslanVolovyk", "109719711261293841416"));
         studentsList.add(new Student("Валерій Губський", "gvv-ua", "107910188078571144657"));
         studentsList.add(new Student("Иван Сергеенко", "dogfight81", "111389859649705526831"));

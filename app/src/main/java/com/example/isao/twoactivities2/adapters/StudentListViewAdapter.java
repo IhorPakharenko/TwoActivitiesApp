@@ -14,16 +14,15 @@ import com.example.isao.twoactivities2.activities.GithubActivity;
 import com.example.isao.twoactivities2.activities.GoogleActivity;
 import com.example.isao.twoactivities2.model.Student;
 
-import java.util.ArrayList;
-
+import io.realm.RealmResults;
 
 
 public class StudentListViewAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<Student> innerStudentsList;
+    private RealmResults<Student> innerStudentsList;
 
-    public StudentListViewAdapter (Context context, ArrayList<Student> innerStudentsList) {
+    public StudentListViewAdapter(Context context, RealmResults<Student> innerStudentsList) {
         this.context = context;
         this.innerStudentsList = innerStudentsList;
     }

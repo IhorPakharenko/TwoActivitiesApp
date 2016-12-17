@@ -1,7 +1,9 @@
 package com.example.isao.twoactivities2.model;
 
 
-public class Student {
+import io.realm.RealmObject;
+
+public class Student extends RealmObject {
     private String studentsName;
     private String studentsGit;
     private String studentsGooglePlus;
@@ -10,6 +12,10 @@ public class Student {
         this.studentsName = studentsName;
         this.studentsGit = studentsGit;
         this.studentsGooglePlus = studentsGooglePlus;
+    }
+
+    public Student() {
+
     }
 
     public String getStudentsName() {
