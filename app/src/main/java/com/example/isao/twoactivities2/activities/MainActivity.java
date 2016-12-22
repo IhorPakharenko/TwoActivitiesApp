@@ -1,40 +1,53 @@
 package com.example.isao.twoactivities2.activities;
 
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.isao.twoactivities2.R;
-import com.example.isao.twoactivities2.receivers.HeadsetIntentReceiver;
+import com.example.isao.twoactivities2.helpers.NavigationDrawer;
 
-public class MainActivity extends AppCompatActivity {
-
-    HeadsetIntentReceiver headsetReceiver;
+public class MainActivity extends NavigationDrawer {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
+        ViewGroup content = (ViewGroup) findViewById(R.id.viewgroup_toolbar);
+        getLayoutInflater().inflate(R.layout.activity_main, content, true);
+
+        final View.OnClickListener onClickListener = new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.listview_start:
+                        startListViewActivity(v);
+                        break;
+                    case R.id.recyclerview_start:
+                        startRecyclerViewActivity(v);
+                        break;
+                    case R.id.pictureview_start:
+                        startPictureViewActivity(v);
+                        break;
+                    case R.id.contactsview_start:
+                        startContactsActivity(v);
+                        break;
+                }
+            }
+        };
+        Button listViewButton = (Button) findViewById(R.id.listview_start);
+        Button recyclerViewButton = (Button) findViewById(R.id.recyclerview_start);
+        Button pictureViewButton = (Button) findViewById(R.id.pictureview_start);
+        Button contactsViewButton = (Button) findViewById(R.id.contactsview_start);
+
+        listViewButton.setOnClickListener(onClickListener);
+        recyclerViewButton.setOnClickListener(onClickListener);
+        pictureViewButton.setOnClickListener(onClickListener);
+        contactsViewButton.setOnClickListener(onClickListener);
     }
-
-    @Override
-    public void onResume() {
-        headsetReceiver = new HeadsetIntentReceiver();
-        IntentFilter filter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
-        registerReceiver(headsetReceiver, filter);
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        unregisterReceiver(headsetReceiver);
-        super.onPause();
-    }
-
-
 
     public void startListViewActivity(View view) {
         Intent intent = new Intent(this, ListViewActivity.class);

@@ -9,4 +9,8 @@
     <string name="search_title">Search</string>
     <string name="search_hint">Enter a name or a surname</string>
     <string name="ok">OK</string>
+    <string name="title_activity_drawer">DrawerActivity</string>
+    <string name="drawer_open">Menu opened</string>
+    <string name="drawer_close">Menu closed</string>
+    <string name="action_settings">Settings</string>
 </resources>

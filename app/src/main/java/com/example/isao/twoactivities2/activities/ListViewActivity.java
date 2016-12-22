@@ -1,15 +1,13 @@
 package com.example.isao.twoactivities2.activities;
 
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.isao.twoactivities2.R;
 import com.example.isao.twoactivities2.adapters.StudentListViewAdapter;
 import com.example.isao.twoactivities2.data.ArrayLists;
+import com.example.isao.twoactivities2.helpers.NavigationDrawer;
 import com.example.isao.twoactivities2.model.Student;
 import com.example.isao.twoactivities2.receivers.HeadsetIntentReceiver;
 
@@ -20,7 +18,7 @@ import io.realm.RealmResults;
 import io.realm.Sort;
 
 
-public class ListViewActivity extends AppCompatActivity {
+public class ListViewActivity extends NavigationDrawer {
 
     HeadsetIntentReceiver headsetReceiver;
     Realm realm;
@@ -28,9 +26,9 @@ public class ListViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listview);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        ViewGroup content = (ViewGroup) findViewById(R.id.viewgroup_toolbar);
+        getLayoutInflater().inflate(R.layout.activity_listview, content, true);
 
         Realm.init(ListViewActivity.this);
         realm = Realm.getDefaultInstance();
@@ -53,91 +51,9 @@ public class ListViewActivity extends AppCompatActivity {
         listView.setAdapter(listAdapter);
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.options_menu, menu);
-//
-//        //Associate searchable configuration with the SearchView
-//        SearchManager searchManager =
-//                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-//        SearchView searchView =
-//                (SearchView) menu.findItem(R.id.search).getActionView();
-//        searchView.setSearchableInfo(
-//                searchManager.getSearchableInfo(getComponentName()));
-//
-//        return true;
-//    }
-
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        View rootView = inflater.inflate(R.layout.listview_fragment, container, false);
-//
-//        ArrayList<Student> studentsList = ArrayLists.makeStudentsList();
-//
-//
-//        realm = Realm.getDefaultInstance();
-//        realm.beginTransaction();
-//        RealmList<Student> studentRealmList = new RealmList<Student>();
-//        studentRealmList.addAll(students.subList(0, students.size()));
-//        realm.commitTransaction();
-//
-//        ListView listView = (ListView) rootView.findViewById(R.id.listview_students);
-//
-//        //Adapter init
-//        StudentListViewAdapter listAdapter = new StudentListViewAdapter(super.getContext(), studentsList);
-//        listView.setAdapter(listAdapter);
-//
-//        return rootView;
-//
-//
-//    }
-//}
-
-    @Override
-    public void onResume() {
-        headsetReceiver = new HeadsetIntentReceiver();
-        IntentFilter filter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
-        registerReceiver(headsetReceiver, filter);
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        unregisterReceiver(headsetReceiver);
-        super.onPause();
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         realm.close();
     }
-
-//    public static class ListViewActivityFragment extends Fragment {
-//        @Override
-//        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                                 Bundle savedInstanceState) {
-//            View rootView = inflater.inflate(R.layout.listview_fragment, container, false);
-//
-//            ArrayList<Student> studentsList = ArrayLists.makeStudentsList();
-//
-//
-//            realm = Realm.getDefaultInstance();
-//            realm.beginTransaction();
-//            RealmList<Student> studentRealmList = new RealmList<Student>();
-//            studentRealmList.addAll(students.subList(0, students.size()));
-//            realm.commitTransaction();
-//
-//            ListView listView = (ListView) rootView.findViewById(R.id.listview_students);
-//
-//            //Adapter init
-//            StudentListViewAdapter listAdapter = new StudentListViewAdapter(super.getContext(), studentsList);
-//            listView.setAdapter(listAdapter);
-//
-//            return rootView;
-//
-//
-//        }
-//    }
 }

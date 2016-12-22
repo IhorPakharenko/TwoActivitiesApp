@@ -2,28 +2,26 @@ package com.example.isao.twoactivities2.activities;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.isao.twoactivities2.R;
 import com.example.isao.twoactivities2.adapters.ContactsRecyclerViewAdapter;
 import com.example.isao.twoactivities2.helpers.ContactHelper;
+import com.example.isao.twoactivities2.helpers.NavigationDrawer;
 import com.example.isao.twoactivities2.model.Contact;
 import com.example.isao.twoactivities2.receivers.HeadsetIntentReceiver;
 
 import java.util.ArrayList;
 
-public class ContactsActivity extends AppCompatActivity {
+public class ContactsActivity extends NavigationDrawer {
 
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private static final int PERMISSIONS_REQUEST_WRITE_CONTACTS = 90;
@@ -33,12 +31,8 @@ public class ContactsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contacts);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        ViewGroup content = (ViewGroup) findViewById(R.id.viewgroup_toolbar);
+        getLayoutInflater().inflate(R.layout.activity_contacts, content, true);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -94,18 +88,10 @@ public class ContactsActivity extends AppCompatActivity {
 
     @Override
     public void onResume() {
-        headsetReceiver = new HeadsetIntentReceiver();
-        IntentFilter filter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
-        registerReceiver(headsetReceiver, filter);
         refreshData();
         super.onResume();
     }
 
-    @Override
-    public void onPause() {
-        unregisterReceiver(headsetReceiver);
-        super.onPause();
-    }
 
     public void refreshData() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&

@@ -2,20 +2,19 @@ package com.example.isao.twoactivities2.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.isao.twoactivities2.R;
+import com.example.isao.twoactivities2.helpers.NavigationDrawer;
 import com.example.isao.twoactivities2.receivers.HeadsetIntentReceiver;
 import com.squareup.picasso.Picasso;
 
-public class PictureViewActivity extends AppCompatActivity {
+public class PictureViewActivity extends NavigationDrawer {
 
     final int GALLERY_REQUEST = 0;
     final int CAMERA_REQUEST = 1;
@@ -52,7 +51,8 @@ public class PictureViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_picture_view);
+        ViewGroup content = (ViewGroup) findViewById(R.id.viewgroup_toolbar);
+        getLayoutInflater().inflate(R.layout.activity_picture_view, content, true);
 
         imageView = (ImageView) findViewById(R.id.changeable_image);
         imageView.setOnClickListener(changeableImageClickListener);
@@ -67,22 +67,5 @@ public class PictureViewActivity extends AppCompatActivity {
                 Picasso.with(this).load(data.getData()).into(imageView);
             }
         }
-    }
-
-    @Override
-    public void onResume() {
-        Log.w("Receiver", "registering");
-        headsetReceiver = new HeadsetIntentReceiver();
-        IntentFilter filter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
-        registerReceiver(headsetReceiver, filter);
-        super.onResume();
-        Log.w("Receiver", "registered!");
-    }
-
-    @Override
-    public void onPause() {
-        Log.w("Receiver", "unregistering!");
-        unregisterReceiver(headsetReceiver);
-        super.onPause();
     }
 }
